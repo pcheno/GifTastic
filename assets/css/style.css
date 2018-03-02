@@ -1,0 +1,37 @@
+body {
+    background: lightyellow;
+    font-family: 'Fredoka One', cursive;
+}
+
+header {
+    background: yellowgreen;
+    text-align: center;
+    font-size: 160%;
+}
+
+.container {
+    text-align: center;
+}
+
+section {
+    background: lightblue;
+    font-size: 120%
+}
+
+button {
+    word-wrap: break-word;
+}
+
+.row {
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    text-align: left;
+    clear: both;
+}
+
+#display {
+    font-size: 140%;
+}

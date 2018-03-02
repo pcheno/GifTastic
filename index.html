@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Trivia Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- linking to Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <!-- Added link to font -->
+  <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+  <!-- Added link to the jQuery Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Added link to the javascript file -->
+  <script type="text/javascript" src="./assets/javascript/game.js"></script>
+  <!-- Added link to style sheet -->
+  <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
+
+</head>
+
+<body>
+  <header class="container">
+    <h1>70's Trivia Time!</h1>
+  </header>
+
+  <section class="container">
+
+    <!-- Timer will poplate within the display id-->
+    <div id="display">
+      <h1>Time Remaining</h1>
+      <h1 id="timer"></h1>
+    </div>
+    <div id="questAns" class="col-12">
+      
+      <!-- add questions and buttons here -->
+
+
+    </div>
+    <!-- at the end of game these will be populated -->
+    <div id="results" class="col-12">
+      <h1>Correct Answers</h1>
+      <h1 id="wins"></h1>
+      <h1>Incorrect Answers</h1>
+      <h1 id="losses"></h1>
+      <h1>Unanswered</h1>
+      <h1 id="noAns"></h1>
+    </div>
+
+    <button id="done">
+      <h1>done</h1>
+    </button>
+    <button id="start">
+        <h1>Play?</h1>
+      </button>
+  </section>
+</body>
+
+</html>
