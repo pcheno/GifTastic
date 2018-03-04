@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Trivia Game</title>
+  <title>Giffy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- linking to Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -20,40 +20,29 @@
 </head>
 
 <body>
-  <header class="container">
-    <h1>70's Trivia Time!</h1>
-  </header>
+  <div class="container">
+    <div class="row">
 
-  <section class="container">
-
-    <!-- Timer will poplate within the display id-->
-    <div id="display">
-      <h1>Time Remaining</h1>
-      <h1 id="timer"></h1>
-    </div>
-    <div id="questAns" class="col-12">
-      
-      <!-- add questions and buttons here -->
-
+      <div id="animalButtons" class="col-12">
+        <!-- animal buttons go here -->
+      </div>
 
     </div>
-    <!-- at the end of game these will be populated -->
-    <div id="results" class="col-12">
-      <h1>Correct Answers</h1>
-      <h1 id="wins"></h1>
-      <h1>Incorrect Answers</h1>
-      <h1 id="losses"></h1>
-      <h1>Unanswered</h1>
-      <h1 id="noAns"></h1>
+
+    <div class="row">
+      <form id="animalForm" class="col-12">
+        <label for="animalInput">Add an animal</label>
+        <input type="text" id="animalInput">
+        <input id="addAnimal" type="submit" value="submit">
+      </form>
     </div>
 
-    <button id="done">
-      <h1>done</h1>
-    </button>
-    <button id="start">
-        <h1>Play?</h1>
-      </button>
-  </section>
+    <div id="animalGif" class="col-12">
+      <!-- gifs go here -->
+    </div>
+
+  </div>
+  <!-- container -->
 </body>
 
 </html>

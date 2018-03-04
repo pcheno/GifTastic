@@ -20,8 +20,15 @@ section {
 
 button {
     word-wrap: break-word;
+    margin: 1%;
+    
 }
-
+button:hover {
+    background-color: gray;
+}
+#addAnimal:hover {
+    background-color: gray;
+}
 .row {
     text-align: center;
 }
