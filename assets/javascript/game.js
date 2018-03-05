@@ -1,6 +1,6 @@
 $(document).ready(function () {
   // Creates an array containing some animals
-  var animals = ["Camel", "Horse", "Skunk", "Cow", "Bird", "Coyote", "Dog", "Pig", "Duck", "Opossum"]
+  var animals = ["Kangaroo", "Horse", "Skunk", "Cow", "Bird", "Coyote", "Dog", "Pig", "Duck", "Opossum"]
   // Create array containing acceptable ratings
   var ratings = ["g", "pg", "y"]
 
