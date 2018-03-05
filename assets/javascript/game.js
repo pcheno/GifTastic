@@ -51,7 +51,11 @@ $(document).ready(function () {
 
     // Constructing a queryURL using the animal name
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-      animal + "&api_key=dc6zaTOxFJmzC&limit=10";
+      animal + "&api_key=VdxI3Z7sfpDYNUa1ke80JpoRVOJ9kLzb&limit=10&rating=g";
+    //var queryURL = "https://api.giphy.com/v1/gifs/random?tag=" +
+    //  animal + "&api_key=dc6zaTOxFJmzC&limit=10&rating=g";
+
+
 
     // Performing an AJAX request with the queryURL
     $.ajax({
@@ -75,6 +79,7 @@ $(document).ready(function () {
           if ((ratings.includes(results[i].rating))) {
             // Creating and storing a div tag
             var animalDiv = $("<div>");
+            animalDiv.addClass("gifyDiv");
 
             // Creating a paragraph tag with the result item's rating
             var p = $("<p>").text("Rating: " + results[i].rating);
@@ -106,16 +111,14 @@ $(document).ready(function () {
   $(document).on("click","img", function () {
     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
     var state = $(this).attr("dataState");
-    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-    // Then, set the image's data-state to animate
-    // Else set src to the data-still value
-    console.log("state:"+state)
+    // If the clicked image's state is still, update its src attribute to what its datAnimate value is.
+    // Then, set the image's dataState to animate
+    // Else set src to the dataStill value
+
     if (state == "animate") {
-      console.log("true state: " + "dataStill: "+  $(this).attr("dataStill") )
       $(this).attr("src", $(this).attr("dataStill"));
       $(this).attr("dataState", "still");
     } else {
-      console.log("false state: " + "dataAnimate: "+  $(this).attr("dataAnimate") )
       $(this).attr("src", $(this).attr("dataAnimate"));
       $(this).attr("dataState", "animate");
     }

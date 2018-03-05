@@ -8,11 +8,15 @@ header {
     text-align: center;
     font-size: 160%;
 }
-
+/*
 .container {
     text-align: center;
 }
-
+*/
+.gifyDiv {
+    float: left;
+    margin: .8%;
+}
 section {
     background: lightblue;
     font-size: 120%
