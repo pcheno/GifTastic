@@ -64,6 +64,9 @@ $(document).ready(function () {
         console.log(queryURL);
 
         console.log(response);
+        //clear out the giffy area
+        $("#animalGif").empty();
+
         // storing the data from the AJAX request in the results variable
         var results = response.data;
 
@@ -80,7 +83,8 @@ $(document).ready(function () {
             // Creating and storing an image tag
             var animalImage = $("<img>");
             // Setting the src attribute of the image to a property pulled off the result item
-            animalImage.attr("src", results[i].images.fixed_height.url);
+            animalImage.attr("src", results[i].images.fixed_height_still.url);
+            
 
             // Appending the paragraph and image tag to the animalDiv
             animalDiv.append(p);
