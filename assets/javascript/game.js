@@ -45,49 +45,55 @@ $(document).ready(function () {
   });
 
 
-  $(document).on("click", ".animalBtn", function () {
-
+  $(document).on("click", ".animalBtn", function (event) {
+    event.preventDefault();
     var animal = $(this).attr("data-name");
 
     // Constructing a queryURL using the animal name
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-      animal + "&api_key=VdxI3Z7sfpDYNUa1ke80JpoRVOJ9kLzb&limit=10&rating=g";
-    //var queryURL = "https://api.giphy.com/v1/gifs/random?tag=" +
-    //  animal + "&api_key=dc6zaTOxFJmzC&limit=10&rating=g";
+    //var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+    // animal + "&api_key=VdxI3Z7sfpDYNUa1ke80JpoRVOJ9kLzb&limit=10&rating=g";
+    // make a random one
+    var queryURL = "https://api.giphy.com/v1/gifs/random?tag=" +
+      animal + "&api_key=VdxI3Z7sfpDYNUa1ke80JpoRVOJ9kLzb&rating=g";
 
-    // Performing an AJAX request with the queryURL
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-      })
-      // After data comes back from the request
-      .then(function (response) {
-        console.log(queryURL);
+    //clear out the giffy area
+    $("#animalGif").empty();
 
-        console.log(response);
-        //clear out the giffy area
-        $("#animalGif").empty();
+    // get 10 random gifs
+    for (var i = 0; i < 10; i++) {
+      // Performing an AJAX request with the queryURL
+      $.ajax({
+          url: queryURL,
+          method: "GET"
+        })
+        // After data comes back from the request
+        .then(function (response) {
 
-        // storing the data from the AJAX request in the results variable
-        var results = response.data;
+          //For the random response 1 object is returned, so unlike the normal search we do not loop an array.
+          console.log(queryURL);
 
-        // Looping through each result item
-        for (var i = 0; i < results.length; i++) {
+          console.log(response);
+
+
+          // storing the data from the AJAX request in the results variable
+          var results = response.data;
+
+
 
           // Creating and storing a div tag
           var animalDiv = $("<div>");
           animalDiv.addClass("gifyDiv");
 
           // Creating a paragraph tag with the result item's rating
-          var p = $("<p>").text("Rating: " + results[i].rating);
+          var p = $("<p>").text("Rating: " + results.rating);
 
           // Creating and storing an image tag
           var animalImage = $("<img>");
           // Setting the src attribute of the image to a property pulled off the result item
           animalImage.attr({
-            src: results[i].images.fixed_height_still.url,
-            dataStill: results[i].images.fixed_height_still.url,
-            dataAnimate: results[i].images.fixed_height.url,
+            src: results.images.fixed_height_still.url,
+            dataStill: results.images.fixed_height_still.url,
+            dataAnimate: results.images.fixed_height.url,
             dataState: "still"
           });
 
@@ -97,17 +103,18 @@ $(document).ready(function () {
 
           // Prependng the animalDiv to the HTML page in the "#animalGif" div
           $("#animalGif").prepend(animalDiv);
+        }); //ajax
+    } //for loop thru results
 
-        } //for loop thru results
-      }); //ajax
 
   }); //on click for animalBtn
 
   //click on giffy   
-  $(document).on("click", "img", function () {
+  $(document).on("click", "img", function (event) {
+    event.preventDefault();
     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
     var state = $(this).attr("dataState");
-    // If the clicked image's state is still, update its src attribute to what its datAnimate value is.
+    // If the clicked image's state is still, update its src attribute to what its dataAnimate value is.
     // Then, set the image's dataState to animate
     // Else set src to the dataStill value
 
