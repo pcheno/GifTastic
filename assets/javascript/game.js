@@ -55,8 +55,6 @@ $(document).ready(function () {
     //var queryURL = "https://api.giphy.com/v1/gifs/random?tag=" +
     //  animal + "&api_key=dc6zaTOxFJmzC&limit=10&rating=g";
 
-
-
     // Performing an AJAX request with the queryURL
     $.ajax({
         url: queryURL,
@@ -75,40 +73,38 @@ $(document).ready(function () {
 
         // Looping through each result item
         for (var i = 0; i < results.length; i++) {
-          // check rating 
-          if ((ratings.includes(results[i].rating))) {
-            // Creating and storing a div tag
-            var animalDiv = $("<div>");
-            animalDiv.addClass("gifyDiv");
 
-            // Creating a paragraph tag with the result item's rating
-            var p = $("<p>").text("Rating: " + results[i].rating);
+          // Creating and storing a div tag
+          var animalDiv = $("<div>");
+          animalDiv.addClass("gifyDiv");
 
-            // Creating and storing an image tag
-            var animalImage = $("<img>");
-            // Setting the src attribute of the image to a property pulled off the result item
-            animalImage.attr({
-              src: results[i].images.fixed_height_still.url,
-              dataStill: results[i].images.fixed_height_still.url,
-              dataAnimate: results[i].images.fixed_height.url,
-              dataState: "still"
-            });
+          // Creating a paragraph tag with the result item's rating
+          var p = $("<p>").text("Rating: " + results[i].rating);
 
+          // Creating and storing an image tag
+          var animalImage = $("<img>");
+          // Setting the src attribute of the image to a property pulled off the result item
+          animalImage.attr({
+            src: results[i].images.fixed_height_still.url,
+            dataStill: results[i].images.fixed_height_still.url,
+            dataAnimate: results[i].images.fixed_height.url,
+            dataState: "still"
+          });
 
-            // Appending the paragraph and image tag to the animalDiv
-            animalDiv.append(p);
-            animalDiv.append(animalImage);
+          // Appending the paragraph and image tag to the animalDiv
+          animalDiv.append(p);
+          animalDiv.append(animalImage);
 
-            // Prependng the animalDiv to the HTML page in the "#animalGif" div
-            $("#animalGif").prepend(animalDiv);
-          } //if included in ratings
+          // Prependng the animalDiv to the HTML page in the "#animalGif" div
+          $("#animalGif").prepend(animalDiv);
+
         } //for loop thru results
       }); //ajax
 
   }); //on click for animalBtn
 
   //click on giffy   
-  $(document).on("click","img", function () {
+  $(document).on("click", "img", function () {
     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
     var state = $(this).attr("dataState");
     // If the clicked image's state is still, update its src attribute to what its datAnimate value is.
@@ -121,10 +117,10 @@ $(document).ready(function () {
     } else {
       $(this).attr("src", $(this).attr("dataAnimate"));
       $(this).attr("dataState", "animate");
-    }
+    } //end of if else state
   }); //end of click on gif
 
- 
+
   //Just beginning, nothing clicked yet
   renderButtons();
 
