@@ -42,59 +42,61 @@ $(document).ready(function () {
   $(document).on("click", ".animalBtn", function () {
 
     var animal = $(this).attr("data-name");
-
+    $("#animalGif").empty();
     // Constructing a queryURL using the animal name
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-      animal + "&api_key=VdxI3Z7sfpDYNUa1ke80JpoRVOJ9kLzb&limit=10&rating=g";
-    //var queryURL = "https://api.giphy.com/v1/gifs/random?tag=" +
-    //  animal + "&api_key=dc6zaTOxFJmzC&limit=10&rating=g";
+    //var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+     // animal + "&api_key=VdxI3Z7sfpDYNUa1ke80JpoRVOJ9kLzb&limit=10&rating=g";
+    var queryURL = "https://api.giphy.com/v1/gifs/random?tag=" +
+      animal + "&api_key=VdxI3Z7sfpDYNUa1ke80JpoRVOJ9kLzb&rating=g";
+    var gifCount = 0; 
+    var gifId = [];  //store gif ids so as to get a display of random gifs
+    do{
+      ++gifCount;
+      // Performing an AJAX request with the queryURL
+      $.ajax({
+          url: queryURL,
+          method: "GET"
+        })
+        // After data comes back from the request
+        .then(function (response) {
+          console.log(queryURL);
 
-    // Performing an AJAX request with the queryURL
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-      })
-      // After data comes back from the request
-      .then(function (response) {
-        console.log(queryURL);
+          console.log(response);
+          //clear out the giffy area
+        
 
-        console.log(response);
-        //clear out the giffy area
-        $("#animalGif").empty();
+          // storing the data from the AJAX request in the results variable
+          var results = response.data;
 
-        // storing the data from the AJAX request in the results variable
-        var results = response.data;
+         
 
-        // Looping through each result item
-        for (var i = 0; i < results.length; i++) {
+            // Creating and storing a div tag
+            var animalDiv = $("<div>");
+            animalDiv.addClass("gifyDiv");
 
-          // Creating and storing a div tag
-          var animalDiv = $("<div>");
-          animalDiv.addClass("gifyDiv");
+            // Creating a paragraph tag with the result item's rating
+            var p = $("<p>").text("Rating: g");
 
-          // Creating a paragraph tag with the result item's rating
-          var p = $("<p>").text("Rating: " + results[i].rating);
+            // Creating and storing an image tag
+            var animalImage = $("<img>");
+            // Setting the src attribute of the image to a property pulled off the result item
+            animalImage.attr({
+              src: results.images.fixed_height_still.url,
+              dataStill: results.images.fixed_height_still.url,
+              dataAnimate: results.images.fixed_height.url,
+              dataState: "still"
+            });
 
-          // Creating and storing an image tag
-          var animalImage = $("<img>");
-          // Setting the src attribute of the image to a property pulled off the result item
-          animalImage.attr({
-            src: results[i].images.fixed_height_still.url,
-            dataStill: results[i].images.fixed_height_still.url,
-            dataAnimate: results[i].images.fixed_height.url,
-            dataState: "still"
-          });
+            // Appending the paragraph and image tag to the animalDiv
+            animalDiv.append(p);
+            animalDiv.append(animalImage);
 
-          // Appending the paragraph and image tag to the animalDiv
-          animalDiv.append(p);
-          animalDiv.append(animalImage);
+            // Prependng the animalDiv to the HTML page in the "#animalGif" div
+            $("#animalGif").prepend(animalDiv);
 
-          // Prependng the animalDiv to the HTML page in the "#animalGif" div
-          $("#animalGif").prepend(animalDiv);
-
-        } //for loop thru results
-      }); //ajax
-
+          
+        }); //ajax
+    } while (gifCount < 10)
   }); //on click for animalBtn
 
   //click on giffy   
