@@ -1,8 +1,6 @@
 $(document).ready(function () {
   // Creates an array containing some animals
-  var animals = ["Kangaroo", "Horse", "Skunk", "Cow", "Bird", "Coyote", "Dog", "Pig", "Duck", "Opossum"]
-  // Create array containing acceptable ratings
-  var ratings = ["g", "pg", "y"]
+  var animals = ["Kangaroo", "Horse", "Skunk", "Cow", "Bird", "Coyote", "Dog", "Pig", "Duck", "Opossum", "sloth"]
 
   function renderButtons() {
     //First empty out the div
@@ -37,20 +35,18 @@ $(document).ready(function () {
     renderButtons();
     // Clear input
     $("#animalInput").val("");
-  });
+  }); //on click of addAnimal buttons
 
-  $(document).on("click", ".animalBtn", function () {
-
+  $(document).on("click", ".animalBtn", function (event) {
+    event.preventDefault();
     var animal = $(this).attr("data-name");
     $("#animalGif").empty();
-    // Constructing a queryURL using the animal name
-    //var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-     // animal + "&api_key=VdxI3Z7sfpDYNUa1ke80JpoRVOJ9kLzb&limit=10&rating=g";
+
     var queryURL = "https://api.giphy.com/v1/gifs/random?tag=" +
       animal + "&api_key=VdxI3Z7sfpDYNUa1ke80JpoRVOJ9kLzb&rating=g";
-    var gifCount = 0; 
-    var gifId = [];  //store gif ids so as to get a display of random gifs
-    do{
+    var gifCount = 0;
+    var gifId = []; //store gif ids so as to get a display of random gifs
+    do {
       ++gifCount;
       // Performing an AJAX request with the queryURL
       $.ajax({
@@ -59,48 +55,42 @@ $(document).ready(function () {
         })
         // After data comes back from the request
         .then(function (response) {
-          console.log(queryURL);
-
-          console.log(response);
-          //clear out the giffy area
-        
 
           // storing the data from the AJAX request in the results variable
           var results = response.data;
 
-         
+          // Creating and storing a div tag
+          var animalDiv = $("<div>");
+          animalDiv.addClass("gifyDiv");
 
-            // Creating and storing a div tag
-            var animalDiv = $("<div>");
-            animalDiv.addClass("gifyDiv");
+          // Creating a paragraph tag with the result item's rating
+          var p = $("<p>").text("Rating: g");
 
-            // Creating a paragraph tag with the result item's rating
-            var p = $("<p>").text("Rating: g");
+          // Creating and storing an image tag
+          var animalImage = $("<img>");
+          // Setting the src attribute of the image to a property pulled off the result item
+          // and getting the giffy imgs and set data state
+          animalImage.attr({
+            src: results.images.fixed_height_still.url,
+            dataStill: results.images.fixed_height_still.url,
+            dataAnimate: results.images.fixed_height.url,
+            dataState: "still"
+          });
 
-            // Creating and storing an image tag
-            var animalImage = $("<img>");
-            // Setting the src attribute of the image to a property pulled off the result item
-            animalImage.attr({
-              src: results.images.fixed_height_still.url,
-              dataStill: results.images.fixed_height_still.url,
-              dataAnimate: results.images.fixed_height.url,
-              dataState: "still"
-            });
+          // Appending the paragraph and image tag to the animalDiv
+          animalDiv.append(p);
+          animalDiv.append(animalImage);
 
-            // Appending the paragraph and image tag to the animalDiv
-            animalDiv.append(p);
-            animalDiv.append(animalImage);
+          // Prependng the animalDiv to the HTML page in the "#animalGif" div
+          $("#animalGif").prepend(animalDiv);
 
-            // Prependng the animalDiv to the HTML page in the "#animalGif" div
-            $("#animalGif").prepend(animalDiv);
-
-          
         }); //ajax
     } while (gifCount < 10)
-  }); //on click for animalBtn
+  }); //on click for animalBtn gets gifs and sets attributes
 
   //click on giffy   
-  $(document).on("click", "img", function () {
+  $(document).on("click", "img", function (event) {
+    event.preventDefault();
     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
     var state = $(this).attr("dataState");
     // If the clicked image's state is still, update its src attribute to what its datAnimate value is.
