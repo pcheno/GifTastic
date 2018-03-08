@@ -1,6 +1,6 @@
 $(document).ready(function () {
   // Creates an array containing some animals
-  var animals = ["Kangaroo", "Horse", "Skunk", "Cow", "Bird", "Coyote", "Dog", "Pig", "Duck", "Opossum", "sloth"]
+  var animals = ["kangaroo", "horse", "skunk", "cow", "bird", "coyote", "dog", "pig", "duck", "opossum", "sloth"]
 
   function renderButtons() {
     //First empty out the div
@@ -37,6 +37,9 @@ $(document).ready(function () {
     $("#animalInput").val("");
   }); //on click of addAnimal buttons
 
+
+
+
   $(document).on("click", ".animalBtn", function (event) {
     event.preventDefault();
     var animal = $(this).attr("data-name");
@@ -46,8 +49,8 @@ $(document).ready(function () {
       animal + "&api_key=VdxI3Z7sfpDYNUa1ke80JpoRVOJ9kLzb&rating=g";
     var gifCount = 0;
     var gifId = []; //store gif ids so as to get a display of random gifs
-    do {
-      ++gifCount;
+    for (var i=0;i < 10;i++) {
+      
       // Performing an AJAX request with the queryURL
       $.ajax({
           url: queryURL,
@@ -70,6 +73,8 @@ $(document).ready(function () {
           var animalImage = $("<img>");
           // Setting the src attribute of the image to a property pulled off the result item
           // and getting the giffy imgs and set data state
+          console.log(results.images.fixed_height_still.url);
+
           animalImage.attr({
             src: results.images.fixed_height_still.url,
             dataStill: results.images.fixed_height_still.url,
@@ -83,9 +88,9 @@ $(document).ready(function () {
 
           // Prependng the animalDiv to the HTML page in the "#animalGif" div
           $("#animalGif").prepend(animalDiv);
-
+          
         }); //ajax
-    } while (gifCount < 10)
+    } //for loop for 10 gifs
   }); //on click for animalBtn gets gifs and sets attributes
 
   //click on giffy   
